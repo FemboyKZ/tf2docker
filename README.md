@@ -1,8 +1,8 @@
 # FKZ Docker
 
-Deduplicated Counter-Strike: Global Offensive server hosting in Docker.
+Deduplicated Team Fortress 2 server hosting in Docker.
 
-FKZ fork of cs2 fork, wack so I recommend using Szwagi's original repo.
+TF2 fork of csgo fork of cs2 fork, wack so I recommend not using this.
 
 ## Watchdog
 
@@ -21,7 +21,7 @@ The server image runs an instance of a Counter-Strike Global Offensive server. Y
 - `/watchdog` - Has to be the same as the one passed to the watchdog.
 - `/user/run.sh` - The script that sets up and runs the server.
 
-#### Volumes convention (not used by cs2docker itself, but it's the recommended naming convention):
+#### Volumes convention (not used by tf2docker itself, but it's the recommended naming convention):
 
 - `/layers` - Plugin binaries that you copy-paste from `run.sh` (SourceMod, GOKZ, etc.).
 - `/mounts` - Files and directories that you symlink from `run.sh` (mapcycle.txt, log directories, etc.).
@@ -32,8 +32,8 @@ It's recommended you edit [the example in this README](#runsh-1).
 
 #### Environment variables:
 
-- `$build_ver` - The version number of Counter-Strike Global Offensive that the server should use.
-- `$build_dir` - The directory where that version of Counter-Strike Global Offensive is installed.
+- `$build_ver` - The version number of Team Fortress 2 that the server should use.
+- `$build_dir` - The directory where that version of Team Fortress 2 is installed.
 - `$server_dir` - The directory where you should build the server.
 - Everything passed to Docker.
 
@@ -43,16 +43,16 @@ It's recommended you edit [the example in this README](#runsh-1).
 
 ```yml
 services:
-  csgowatchdog:
-    image: csgowatchdog
-    container_name: csgowatchdog
+  tf2watchdog:
+    image: tf2watchdog
+    container_name: tf2watchdog
     restart: unless-stopped
     user: 1000:1000
     volumes:
       - ./watchdog:/watchdog
-  csgoserver1:
-    image: csgoserver
-    container_name: csgoserver1
+  tf2server1:
+    image: tf2server
+    container_name: tf2server1
     restart: unless-stopped
     user: 1000:1000
     ports:
@@ -65,9 +65,9 @@ services:
       - ./layers:/layers
       - ./mounts:/mounts
       - ./user:/user:ro
-  csgoserver2:
-    image: csgoserver
-    container_name: csgoserver2
+  tf2server2:
+    image: tf2server
+    container_name: tf2server2
     restart: unless-stopped
     user: 1000:1000
     ports:
@@ -100,5 +100,5 @@ cp -rs "$build_dir"/* "$server_dir"
 ln -s "/mounts/maps" "$server_dir/maps"
 
 # Run the server
-"$server_dir/srcds_linux" -game csgo -strictportbind -port "$PORT" -nobreakpad -noautoupdate +sv_setsteamaccount "$GSLT" +map de_dust2
+"$server_dir/srcds_linux" -game tf2 -strictportbind -port "$PORT" -nobreakpad -noautoupdate +sv_setsteamaccount "$GSLT" +map ???
 ```

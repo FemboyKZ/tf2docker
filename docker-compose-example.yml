@@ -5,9 +5,9 @@ x-default-env: &default-env
   CONTACT: admin@somedomain.com
 
 services:
-  csgowatchdog:
-    image: csgowatchdog
-    container_name: csgowatchdog
+  tf2watchdog:
+    image: tf2watchdog
+    container_name: tf2watchdog
     restart: unless-stopped
     user: 1000:1000
     tty: true
@@ -20,9 +20,9 @@ services:
         max-file: 5
         max-size: 10m
     network_mode: bridge
-  csgo-server-1:
-    image: csgoserver
-    container_name: csgo-server-1
+  tf2-server-1:
+    image: tf2server
+    container_name: tf2-server-1
     restart: unless-stopped
     user: 1000:1000
     tty: true
@@ -38,7 +38,6 @@ services:
       ID: 1 # unique ID for this server, used for mount folders
       HOSTNAME: Kreedz | EU | Public | 128t VNL Global
       GSLT: "" # https://steamcommunity.com/dev/managegameservers
-      GSLT_NEW: "" # gslt for new app ID (4465480)
       IP: 0.0.0.0
       IP_DOMAIN: somedomain.com
       PORT: 27015
@@ -46,9 +45,9 @@ services:
       PASSWORD: ""
       TICKRATE: 128
       EXTRA_LAUNCH_OPTS: "" # extra launch options
-      MAP: de_nuke
+      MAP: ctf_2fort
       REGION: EU # server region code (EU, NA)
-      TAGS: eu,public,csgo # comma separated list of tags
+      TAGS: eu,public,tf2 # comma separated list of tags
       # Database settings
       DB_PORT: 3306
       DB_HOST: localhost
@@ -62,9 +61,6 @@ services:
       AC: true # enable CowAC & AntiDLL (true/false)
       ABH: false # enable ABH (true/false)
       MODE: "" # server mode (server specific configs)
-      KZ_APIKEY: "" # kz apikey
-      KZ_MAPTIERS: false # enable maptiers integration (true/false)
-      NEW_APPID: false # whether to run server with new app ID (4465480) (true/false)
     volumes:
       - ./watchdog:/watchdog
       - ./layers:/layers:ro

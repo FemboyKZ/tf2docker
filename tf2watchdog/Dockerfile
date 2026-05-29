@@ -9,7 +9,7 @@ RUN dpkg --add-architecture i386 \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
-COPY csgowatchdog.sh .
-RUN chmod 555 csgowatchdog.sh
+COPY tf2watchdog.sh .
+RUN chmod 555 tf2watchdog.sh
 
-ENTRYPOINT ["/app/csgowatchdog.sh"]
+ENTRYPOINT ["/app/tf2watchdog.sh"]

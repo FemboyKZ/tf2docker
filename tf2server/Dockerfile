@@ -7,9 +7,9 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-COPY csgoserver.sh /app/csgoserver.sh
+COPY tf2server.sh /app/tf2server.sh
 COPY run.sh /user/run.sh
-RUN chmod 555 /app/csgoserver.sh /user/run.sh
+RUN chmod 555 /app/tf2server.sh /user/run.sh
 
 WORKDIR /
-ENTRYPOINT ["/app/csgoserver.sh"]
+ENTRYPOINT ["/app/tf2server.sh"]
