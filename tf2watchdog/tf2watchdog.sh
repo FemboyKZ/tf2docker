@@ -4,6 +4,7 @@ set -ueEo pipefail
 
 fetch_latest_tf2_version() {
     local api_url="https://api.steampowered.com/ISteamApps/UpToDateCheck/v1?version=0&format=json&appid=232250"
+    # THIS DOES NOT WORK, TODO: FIND ANOTHER WAY TO GET THE LATEST VERSION NUMBER
     curl -sf $api_url | jq -re ".response.required_version | select(type == \"number\")"
 }
 
